@@ -37,9 +37,14 @@ namespace PortWatcher
         {
             _tray = new NotifyIcon
             {
-                Icon = System.Drawing.SystemIcons.Shield,
-                Visible = true
+                Icon = LoadTrayIcon()
             };
+            _tray.ShowBalloonTip(
+                3000,
+                "PortWatcher",
+                "PortWatcher 已在系統匣執行（右下角），右鍵可退出",
+                ToolTipIcon.Info
+            );
 
             BuildMenu();
             UpdateTrayText();
@@ -52,6 +57,20 @@ namespace PortWatcher
             _timer.Tick += (_, __) => ScanAndNotify(forceNotify: false);
             _timer.Start();
         }
+
+        private static System.Drawing.Icon LoadTrayIcon()
+        {
+            var asm = typeof(TrayAppContext).Assembly;
+
+            const string resName = "PortWatcher.assets.portwatcher.ico";
+
+            using var stream = asm.GetManifestResourceStream(resName);
+            if (stream is null)
+                return System.Drawing.SystemIcons.Shield; // 找不到就用預設，避免秒退
+
+            return new System.Drawing.Icon(stream);
+        }
+
 
         private void BuildMenu()
         {

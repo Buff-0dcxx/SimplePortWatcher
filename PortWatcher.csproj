@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>portwatcher.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+  <EmbeddedResource Include="~\assets\portwatcher.ico" />
+  </ItemGroup>
+
 
 </Project>
