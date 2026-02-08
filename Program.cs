@@ -37,7 +37,7 @@ namespace PortWatcher
         {
             _tray = new NotifyIcon
             {
-                Icon = LoadTrayIcon()
+                Icon = LoadTrayIcon(), Visible = true
             };
             _tray.ShowBalloonTip(
                 3000,
